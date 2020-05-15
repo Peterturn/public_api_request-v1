@@ -56,7 +56,7 @@ function generateEmployees(data) {
                                 <p class="modal-text">Birthday: ${modItem.dob.date.slice(0,9)}</p>
                             </div>
                         </div>
-                        }, `);
+                        }`,);
         
 
     gallery.innerHTML = html;  
