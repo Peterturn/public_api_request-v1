@@ -22,7 +22,7 @@ function generateEmployees(data) {
     /** 
      * employees small cards
      */
-    let html;
+    let html = '';
     data.map(item =>
         html += ` 
             <div class="card" id="${item.name.first}">
@@ -38,14 +38,19 @@ function generateEmployees(data) {
                 `);
 
     gallery.innerHTML = html;
+
+
 }
 
 
-function bigCard(employeeInfo) {
+function bigCard(data) {
     /** 
      * employees module cards
      */
-    let moduleHTML;
+
+
+
+    let moduleHTML = '';
     employeeData.map(modItem =>
         //let birthday = item.dob.date.slice(0,9); 
         moduleHTML += `{${modItem.name.first} : 
@@ -72,12 +77,22 @@ function bigCard(employeeInfo) {
 /** 
  * 
  */
-let cards = document.getElementsByClassName('card');
-gallery.addEventListener('click', (e) => {
-    let eTarget = e.target;
-    for (let i = 0; i < cards.length; i++) {
-        if (eTarget === cards[i]) {
-            console.log("clicked");
-        }
-    }
-});
+
+ //----- TEST CODE -----//
+ let cards = document.getElementsByClassName('card');
+ cards.forEach(item => {
+     item.addEventListener('click', event => {
+         let eTarget = event.target;
+         console.log(eTarget);
+
+     });
+ });
+// let cards = document.getElementsByClassName('card');
+// gallery.addEventListener('click', (e) => {
+//     let eTarget = e.target;
+//     for (let i = 0; i < cards.length; i++) {
+//         if (eTarget === cards[i]|| or) {
+//             console.log("clicked");
+//         }
+//     }
+// });
