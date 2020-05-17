@@ -15,7 +15,7 @@ fetch('https://randomuser.me/api/?results=12')
         generateEmployees(data.results);
         eListener(data);
     })
-    .then(res => bigBoxClose(res))
+    //.then(res => bigBoxClose(res))
 
 /** 
  * functions
@@ -75,13 +75,19 @@ function eListener(data) {
                        </div>
                        `;
             gallery.innerHTML += moduleHTML;
+            
             //-----Test Code Start-----//
-            let bigBox = document.getElementById('bigBox');
-            let xBTN = document.getElementById('modal-close-btn');
+            let BTN = document.getElementById("modal-close-btn")
+            
             //-----Test Code End-----//
         });
     }
-
+    let bigBox = document.getElementById('bigBox');
+    
+    
+    bigBox.addEventListener('click', (e) => {
+                    gallery.removeChild(gallery.lastElementChild);
+            })
 }
 
 
@@ -89,10 +95,5 @@ function eListener(data) {
 
 //     let bigBox = document.getElementById('bigBox');
 //     let xBTN = document.getElementById('modal-close-btn');
-//     bigBox.addEventListener('click', (e) => {
-
-//         if (e.target === xBTN) {
-//             gallery.removeChild(gallery.lastElementChild);;
-//         }
-//     })
+    
 // }
