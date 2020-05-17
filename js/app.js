@@ -44,36 +44,15 @@ function generateEmployees(data) {
 }
 
 
-function bigCard(data) {
-    /** 
-     * employees module cards
-     */
+/** 
+ * employees module cards
+ */
 
 
 
-//     let moduleHTML = '';
-//     employeeData.map(modItem =>
-//         //let birthday = item.dob.date.slice(0,9); 
-//         moduleHTML += `{${modItem.name.first} : 
-           
-//            <div class="modal-container" id="${modItem.name.first}">
-//                        <div class="modal">
-//                            <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-//                            <div class="modal-info-container">
-//                                <img class="modal-img" src="${modItem.picture.large}" alt="profile picture ${modItem.name.last}">
-//                                <h3 id="name" class="modal-name cap">${modItem.name.first} ${modItem.name.last}</h3>
-//                                <p cla="modal-text">${modItem.email}</p>
-//                                <p class="modal-text cap">${modItem.location.city}</p>
-//                                <hr>
-//                                <p class="modal-text">${modItem.phone}</p>
-//                                <p class="modal-text">${modItem.location.street.number} ${modItem.location.street.name}, ${modItem.location.city}, ${modItem.location.state} ${modItem.location.postcode}</p>
-//                                <p class="modal-text">Birthday: ${modItem.dob.date.slice(0,9)}</p>
-//                            </div>
-//                        </div>
-//                        }`, );
 
-//     testZone.innerHTML = moduleHTML
-// }
+
+
 
 /** 
  * 
@@ -84,7 +63,37 @@ function eListener(data) {
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener('click', event => {
-            console.log(cards[i]);
+            //-----Test Code Start-----//
+            let moduleHTML = '';
+            moduleHTML += ` 
+           
+           <div class="modal-container" id="bigBox">
+                       <div class="modal">
+                           <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+                           <div class="modal-info-container">
+                               <img class="modal-img" src="${employeeArr[0][i].picture.large}" alt="profile picture ${employeeArr[0][i].name.last}">
+                               <h3 id="name" class="modal-name cap">${employeeArr[0][i].name.first} ${employeeArr[0][i].name.last}</h3>
+                               <p cla="modal-text">${employeeArr[0][i].email}</p>
+                               <p class="modal-text cap">${employeeArr[0][i].location.city}</p>
+                               <hr>
+                               <p class="modal-text">${employeeArr[0][i].phone}</p>
+                               <p class="modal-text">${employeeArr[0][i].location.street.number} ${employeeArr[0][i].location.street.name}, ${employeeArr[0][i].location.city}, ${employeeArr[0][i].location.state} ${employeeArr[0][i].location.postcode}</p>
+                               <p class="modal-text">Birthday: ${employeeArr[0][i].dob.date.slice(0,9)}</p>
+                           </div>
+                       </div>
+                       `;
+                       gallery.innerHTML += moduleHTML;
+            //-----Test Code End-----//
+            console.log(employeeArr[0][i]);
         });
     }
+    document.getElementById('bigBox').addEventListener('click', (e)=>{
+        let xBTN = document.getElementById('modal-close-btn');
+        let bigBox = document.getElementById('bigBox');
+        console.log(e.target);
+        
+        if(e.target === xBTN){
+        bigBox.style.display= 'none'; 
+        }
+    })
 }
