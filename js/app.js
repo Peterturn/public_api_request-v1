@@ -4,18 +4,21 @@
 const gallery = document.getElementById('gallery');
 const testZone = document.getElementById('test');
 let employeeArr = [];
-
+let bigBox;
+let xBTN;
+let stuff = ''
 /** 
  * Fetch protocols 
  */
 fetch('https://randomuser.me/api/?results=12')
+
     .then(response => response.json())
     .then((data) => {
         employeeArr.push(data.results);
         generateEmployees(data.results);
         eListener(data);
     })
-    //.then(res => bigBoxClose(res))
+//.then(res => bigBoxClose(res))
 
 /** 
  * functions
@@ -52,9 +55,9 @@ function generateEmployees(data) {
 function eListener(data) {
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i < cards.length; i++) {
-        let birthday = employeeArr[0][i].dob.date.slice(8,10)
-        let birthMonth = employeeArr[0][i].dob.date.slice(5,7)
-        let birthYear = employeeArr[0][i].dob.date.slice(2,4)
+        let birthday = employeeArr[0][i].dob.date.slice(8, 10)
+        let birthMonth = employeeArr[0][i].dob.date.slice(5, 7)
+        let birthYear = employeeArr[0][i].dob.date.slice(2, 4)
         cards[i].addEventListener('click', event => {
             let moduleHTML = '';
             moduleHTML += ` 
@@ -75,25 +78,20 @@ function eListener(data) {
                        </div>
                        `;
             gallery.innerHTML += moduleHTML;
-            
-            //-----Test Code Start-----//
-            let BTN = document.getElementById("modal-close-btn")
-            
-            //-----Test Code End-----//
+            bigBox = document.getElementById('bigBox');
+            xBTN = document.getElementById('modal-close-btn');
+
+            xBTN.addEventListener('click', ()=>{
+                bigBox.remove()
+               })
         });
     }
-    let bigBox = document.getElementById('bigBox');
-    
-    
-    bigBox.addEventListener('click', (e) => {
-                    gallery.removeChild(gallery.lastElementChild);
-            })
 }
 
+//-----Test Code Start-----//
 
-// function bigBoxClose() {
 
-//     let bigBox = document.getElementById('bigBox');
-//     let xBTN = document.getElementById('modal-close-btn');
-    
-// }
+
+
+
+//-----Test Code End-----//
