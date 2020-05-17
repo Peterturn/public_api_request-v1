@@ -15,6 +15,7 @@ fetch('https://randomuser.me/api/?results=12')
         generateEmployees(data.results);
         eListener(data);
     })
+    .then(res => bigBoxClose(res))
 
 /** 
  * functions
@@ -40,18 +41,7 @@ function generateEmployees(data) {
 
     gallery.innerHTML = html;
 
-
 }
-
-
-/** 
- * employees module cards
- */
-
-
-
-
-
 
 
 /** 
@@ -62,8 +52,10 @@ function generateEmployees(data) {
 function eListener(data) {
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i < cards.length; i++) {
+        let birthday = employeeArr[0][i].dob.date.slice(8,10)
+        let birthMonth = employeeArr[0][i].dob.date.slice(5,7)
+        let birthYear = employeeArr[0][i].dob.date.slice(2,4)
         cards[i].addEventListener('click', event => {
-            //-----Test Code Start-----//
             let moduleHTML = '';
             moduleHTML += ` 
            
@@ -77,23 +69,30 @@ function eListener(data) {
                                <p class="modal-text cap">${employeeArr[0][i].location.city}</p>
                                <hr>
                                <p class="modal-text">${employeeArr[0][i].phone}</p>
-                               <p class="modal-text">${employeeArr[0][i].location.street.number} ${employeeArr[0][i].location.street.name}, ${employeeArr[0][i].location.city}, ${employeeArr[0][i].location.state} ${employeeArr[0][i].location.postcode}</p>
-                               <p class="modal-text">Birthday: ${employeeArr[0][i].dob.date.slice(0,9)}</p>
+                               <p class="modal-text">${employeeArr[0][i].location.street.number} ${employeeArr[0][i].location.street.name}, ${employeeArr[0][i].location.city}, ${employeeArr[0][i].nat} ${employeeArr[0][i].location.postcode}</p>
+                               <p class="modal-text">Birthday: ${birthMonth}/${birthday}/${birthYear}</p>
                            </div>
                        </div>
                        `;
-                       gallery.innerHTML += moduleHTML;
+            gallery.innerHTML += moduleHTML;
+            //-----Test Code Start-----//
+            let bigBox = document.getElementById('bigBox');
+            let xBTN = document.getElementById('modal-close-btn');
             //-----Test Code End-----//
-            console.log(employeeArr[0][i]);
         });
     }
-    document.getElementById('bigBox').addEventListener('click', (e)=>{
-        let xBTN = document.getElementById('modal-close-btn');
-        let bigBox = document.getElementById('bigBox');
-        console.log(e.target);
-        
-        if(e.target === xBTN){
-        bigBox.style.display= 'none'; 
-        }
-    })
+
 }
+
+
+// function bigBoxClose() {
+
+//     let bigBox = document.getElementById('bigBox');
+//     let xBTN = document.getElementById('modal-close-btn');
+//     bigBox.addEventListener('click', (e) => {
+
+//         if (e.target === xBTN) {
+//             gallery.removeChild(gallery.lastElementChild);;
+//         }
+//     })
+// }
