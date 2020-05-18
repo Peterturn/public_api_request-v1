@@ -3,26 +3,37 @@
  */
 const gallery = document.getElementById('gallery');
 const testZone = document.getElementById('test');
+
+/** employeeArr captures the data and is later used to compare against 
+ *employee little cards data and to complete Big Module data.
+ */
 let employeeArr = [];
 let bigBox;
 let xBTN;
-let stuff = ''
+
 /** 
  * Fetch protocols 
  */
-fetch('https://randomuser.me/api/?results=12')
 
+//FEtch GETs 12 random users from the API
+fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
     .then((data) => {
+        //stores data for comparision in eventListener
         employeeArr.push(data.results);
+
+        //Creates 12 little Employee cards and post them to the DOM
         generateEmployees(data.results);
+
+        //Opens and closes Big-Module-Card
         eListener(data);
     })
-//.then(res => bigBoxClose(res))
 
 /** 
  * functions
  */
+
+//function creates small cards of employee information and post it to the DOM
 function generateEmployees(data) {
     /** 
      * employees small cards
@@ -48,20 +59,25 @@ function generateEmployees(data) {
 
 
 /** 
- * 
+ * Open and Close Module EventListeners
  */
-
-//----- TEST CODE -----//
 function eListener(data) {
     let cards = document.getElementsByClassName('card');
+    //For-Loop attaches an event listener to each employee card
     for (let i = 0; i < cards.length; i++) {
+
+        //vars to re-arrange the way the birthday appears in the DOM
         let birthday = employeeArr[0][i].dob.date.slice(8, 10)
         let birthMonth = employeeArr[0][i].dob.date.slice(5, 7)
         let birthYear = employeeArr[0][i].dob.date.slice(2, 4)
+
+        /**
+         * each card has an attached event listener. The event listener based on selection creates
+         * a module with employee info using a flexible template literal.
+         */
         cards[i].addEventListener('click', event => {
             let moduleHTML = '';
-            moduleHTML += ` 
-           
+            moduleHTML += `
            <div class="modal-container" id="bigBox">
                        <div class="modal">
                            <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -77,21 +93,17 @@ function eListener(data) {
                            </div>
                        </div>
                        `;
-            gallery.innerHTML += moduleHTML;
+            //Appends the template literal as the next DOM element.
+            //Thank you to @Kalen H "Treehouse Student" who suggested 'insertAdjacentHTML'.
+            gallery.insertAdjacentHTML('afterend', moduleHTML)
+
+            //var selectors for the next event Listener
             bigBox = document.getElementById('bigBox');
             xBTN = document.getElementById('modal-close-btn');
-
-            xBTN.addEventListener('click', ()=>{
+            //event listener to remove the module when clicking the 'x' button
+            xBTN.addEventListener('click', () => {
                 bigBox.remove()
-               })
+            })
         });
     }
 }
-
-//-----Test Code Start-----//
-
-
-
-
-
-//-----Test Code End-----//
